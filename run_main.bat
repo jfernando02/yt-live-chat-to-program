@@ -1,4 +1,4 @@
 @echo off
-set PYTHON="PATH\python.exe"
+set PYTHON=C:\Users\jfern\AppData\Local\Programs\Python\Python312\python.exe
 %PYTHON% main.py %*
 pause
