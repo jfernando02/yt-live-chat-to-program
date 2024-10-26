@@ -37,19 +37,16 @@ def send_letter(hwnd, vk_key_string):
     lparam_down = 0x00000001 | (scancode << 16)
     lparam_up = 0xC0000001 | (scancode << 16)
 
-    print(f"Sending key '{vk_key_string}' with VK_CODE: {vk_key}, ScanCode: {scancode}")
-
     # Send WM_KEYDOWN
     result = PostMessageA(hwnd, WM_KEYDOWN, vk_key, lparam_down)
     if not result:
         raise ctypes.WinError(ctypes.get_last_error())
-    time.sleep(0.1)
+    time.sleep(0.15)
     # Send WM_KEYUP
     result = PostMessageA(hwnd, WM_KEYUP, vk_key, lparam_up)
+    time.sleep(0.15)
     if not result:
         raise ctypes.WinError(ctypes.get_last_error())
-
-    print(f"Sent key '{vk_key_string}' to the window (HWND: {hwnd}).")
 
 
 # Example usage

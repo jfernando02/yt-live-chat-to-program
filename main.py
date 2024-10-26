@@ -1,4 +1,5 @@
 import ctypes
+import time
 
 from chat_downloader import ChatDownloader
 from random import randint
@@ -13,7 +14,8 @@ import input_to_pokemon
 def main():
     url = input('   Enter the YouTube URL: ')
     print('')
-    chat = ChatDownloader(cookies="./cookies.txt").get_chat(url)
+    current_time = time.time()
+    chat = ChatDownloader(cookies="./cookies.txt").get_chat(url, start_time=current_time)
 
     def format_message(message_dictionary, add_name):  # FORMAT: <author>:   <message> or <message>
         formatted_message_string = message_dictionary['message']
