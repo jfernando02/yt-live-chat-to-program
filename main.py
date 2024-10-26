@@ -10,7 +10,7 @@ import input_to_pokemon
 def main():
     url = input('   Enter the YouTube URL: ')
     print('')
-    chat = ChatDownloader().get_chat(url)
+    chat = ChatDownloader(cookies="./cookies.txt").get_chat(url)
 
     output_file_name = input('   Enter the name of the output file: ')
 
