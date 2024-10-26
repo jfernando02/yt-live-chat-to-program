@@ -1,7 +1,10 @@
+import ctypes
+
 from chat_downloader import ChatDownloader
 from random import randint
 from datetime import datetime
 
+from pywinauto.findwindows import enum_windows
 from sympy.strategies.core import switch
 
 import input_to_pokemon
@@ -12,20 +15,6 @@ def main():
     print('')
     chat = ChatDownloader(cookies="./cookies.txt").get_chat(url)
 
-    output_file_name = input('   Enter the name of the output file: ')
-
-    if output_file_name == '':
-        output_file_name = url.replace('https://www.youtube.com/watch?v=', '') + '+' + str(randint(-999999, 999999))
-
-    message_only_path = input('   Enter the path to the message only file: ')
-    if message_only_path == '':
-        message_only_output_file = 'outputs/message-only/message-only-' + output_file_name + '.txt'
-    else:
-        message_only_output_file = message_only_path + '/message-only-' + output_file_name + '.txt'
-
-    print('')
-    print(' Message Only Output File: ' + message_only_output_file)
-
     def format_message(message_dictionary, add_name):  # FORMAT: <author>:   <message> or <message>
         formatted_message_string = message_dictionary['message']
 
@@ -35,35 +24,50 @@ def main():
         return formatted_message_string
 
     # Note CMD only supports ASCII characters, so it will display non-ASCII characters as "?"
-    print(chat.__dict__)
     print('\n Messages:')
     for message in chat:
         chat.print_formatted(message)
         potential_input = format_message(message, False)
         if chat_to_input(potential_input)!= "":
-            input_to_pokemon.send_input_to_pokemon(chat_to_input(potential_input))
-        with open(message_only_output_file, 'a', encoding="utf-8") as messages_only_file:
-            messages_only_file.write(format_message(message, False) + '\n')
+            hwnd = ctypes.windll.user32.FindWindowW(None, "mGBA - 0.10.3")
+            input_to_pokemon.send_letter(hwnd, chat_to_input(potential_input))
 
+def get_window_title(hwnd):
+    """Retrieve the window title for a given window handle."""
+    length = ctypes.windll.user32.GetWindowTextLengthW(hwnd)
+    if length > 0:
+        buffer = ctypes.create_unicode_buffer(length + 1)
+        ctypes.windll.user32.GetWindowTextW(hwnd, buffer, length + 1)
+        return buffer.value
+    print('failed')
+    return None
+
+def get_window_class_name(hwnd):
+    """Retrieve the class name of a given window handle."""
+    buffer = ctypes.create_unicode_buffer(256)  # Arbitrarily large buffer
+    result = ctypes.windll.user32.GetClassNameW(hwnd, buffer, 256)
+    if result > 0:
+        return buffer.value
+    return None
 
 def chat_to_input(message):
     match message.lower():
         case "!a":
-            return "c"
+            return "VK_C"
         case "!b":
-            return "v"
+            return "VK_V"
         case "!left":
-            return "a"
+            return "VK_A"
         case "!right":
-            return "d"
+            return "VK_D"
         case "!up":
-            return "w"
+            return "VK_W"
         case "!down":
-            return "s"
+            return "VK_S"
         case "!select":
-            return "z"
+            return "VK_Z"
         case "!start":
-            return "x"
+            return "VK_X"
         case _:
             return ""
 
