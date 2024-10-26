@@ -1,0 +1,2 @@
+sympy~=1.13.3
+pywinauto~=0.6.8
