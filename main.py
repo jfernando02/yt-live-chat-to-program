@@ -8,21 +8,6 @@ import input_to_pokemon
 
 
 def main():
-    print('''
-    YouTube Live Chat to Text File
-    by: Divinity
-
-    This project reads YouTube live stream messages and stores them in 2
-    .txt files inside "outputs/name-message/" or "outputs/message-only/"
-    The first contains all the messages, and the latter contains all the
-    messages and the author's names.
-    FORMAT: <author>:   <message> or <message> (Oldest to Latest)
-
-    -Credits to:
-    Chat Downloader: https://github.com/xenova/chat-downloader
-    Codeium: https://www.codeium.com/
-    ''')
-
     url = input('   Enter the YouTube URL: ')
     print('')
     chat = ChatDownloader().get_chat(url)
@@ -50,6 +35,7 @@ def main():
         return formatted_message_string
 
     # Note CMD only supports ASCII characters, so it will display non-ASCII characters as "?"
+    print(chat.__dict__)
     print('\n Messages:')
     for message in chat:
         chat.print_formatted(message)
