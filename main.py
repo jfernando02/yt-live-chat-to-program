@@ -30,9 +30,9 @@ def main():
     for message in chat:
         chat.print_formatted(message)
         potential_input = format_message(message, False)
-        if chat_to_input(potential_input)!= "":
+        if chat_to_windows_input(potential_input)!= "":
             hwnd = ctypes.windll.user32.FindWindowW(None, "mGBA - 0.10.3")
-            input_to_pokemon.send_letter(hwnd, chat_to_input(potential_input))
+            input_to_pokemon.send_letter(hwnd, chat_to_windows_input(potential_input))
 
 def get_window_title(hwnd):
     """Retrieve the window title for a given window handle."""
@@ -52,7 +52,7 @@ def get_window_class_name(hwnd):
         return buffer.value
     return None
 
-def chat_to_input(message):
+def chat_to_windows_input(message):
     match message.lower():
         case "!a":
             return "VK_C"
