@@ -1,6 +1,8 @@
+import argparse
 import subprocess
 import time
 import shlex
+import os
 
 class VirtualDisplayManager:
     def __init__(self, display_number):
@@ -13,7 +15,6 @@ class VirtualDisplayManager:
                                              stderr=subprocess.PIPE)
 
         # Set the DISPLAY environment variable
-        import os
         os.environ["DISPLAY"] = self.display_env
 
         # Allow some time for Xvfb to initialize
@@ -56,14 +57,21 @@ class VirtualDisplayManager:
         type_command = f"xdotool type \"{text}\""
         subprocess.run(shlex.split(type_command))
 
-def main():
+def main(title=None):
     virtual_display = VirtualDisplayManager(display_number=99)
 
     # Focus the application window by its title
-    virtual_display.focus_window_by_partial_title("InputTest.txt")
+    virtual_display.focus_window_by_partial_title(partial_title=title)
 
     # Type some text into the application window
     virtual_display.type_text("Hello, world!")
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Run a virtual display manager and interact with application windows.")
+    parser.add_argument(
+        "-t", "--title",
+        required=True,
+        help="The partial title of the application window to focus (e.g. 'InputTest.txt - Terminal')."
+    )
+    args = parser.parse_args()
+    main(args.title)
