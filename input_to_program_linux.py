@@ -37,7 +37,7 @@ class VirtualDisplayManager:
         :type partial_title: str
         """
         # Find the window ID(s) that contain the partial title
-        window_id_command = f"xdotool search --onlyvisible --name \"{partial_title}\""
+        window_id_command = f"xdotool search --onlyvisible --name {partial_title}"
         window_ids = subprocess.check_output(shlex.split(window_id_command)).decode().strip().split('\n')
 
         if not window_ids:
