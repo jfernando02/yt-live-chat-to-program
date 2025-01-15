@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Set DISPLAY explicitly to ensure graphical environment is accessible
+export DISPLAY=:0
+
 # Check that a title was provided
 if [ -z "$1" ]; then
   echo "Usage: $0 <partial_window_title>"
