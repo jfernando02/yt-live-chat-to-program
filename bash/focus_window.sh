@@ -7,7 +7,7 @@ if [ -z "$1" ]; then
 fi
 
 # Find and focus window
-WINDOW_ID=$(xdotool search --name "$1")
+WINDOW_ID=$(xdotool search --name "$1" | head -n 1)
 if [ -z "$WINDOW_ID" ]; then
   echo "No window found with title: $1"
   exit 1
