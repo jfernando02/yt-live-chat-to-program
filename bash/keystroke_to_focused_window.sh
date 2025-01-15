@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Set DISPLAY explicitly to ensure graphical environment is accessible
+export DISPLAY=:0
+
 # Check if a keystroke is provided
 if [ -z "$1" ]; then
   echo "Usage: $0 <keystroke>"
