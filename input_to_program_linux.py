@@ -37,16 +37,7 @@ class VirtualDisplayManager:
         :param partial_title: A substring of the title of the window to focus
         :type partial_title: str
         """
-        # Find the window ID(s) that contain the partial title
-        window_id_command = f"xdotool search --name {partial_title}"
-        window_ids = subprocess.check_output(shlex.split(window_id_command)).decode().strip().split('\n')
-
-        if not window_ids:
-            raise Exception(f"No visible window found containing title: {partial_title}")
-
-        # Focus the first matched window
-        focus_command = f"xdotool windowactivate {window_ids[0]}"
-        subprocess.run(shlex.split(focus_command))
+        subprocess.run(["./bash/focus_window.sh", partial_title], check=True)
 
     def type_text(self, text):
         """
