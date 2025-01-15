@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Check that a title was provided
 if [ -z "$1" ]; then
   echo "Usage: $0 <partial_window_title>"
