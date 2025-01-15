@@ -39,23 +39,22 @@ class VirtualDisplayManager:
         """
         subprocess.run(["./bash/focus_window.sh", partial_title], check=True)
 
-    def type_text(self, text):
+    def send_keystroke(self, keystroke):
         """
-        Type text into the focused window.
-        :param text: The text to type
-        :type text: str
+        Send keystroke into the focused window.
+        :param keystroke: The keystroke to send
+        :type keystroke: str
         """
-        type_command = f"xdotool type \"{text}\""
-        subprocess.run(shlex.split(type_command))
+        subprocess.run(["./bash/keystroke_to_focused_window.sh", keystroke], check=True)
 
-def main(title=None):
+def main(title=None, keystroke=None):
     virtual_display = VirtualDisplayManager(display_number=99)
 
     # Focus the application window by its title
     virtual_display.focus_window_by_partial_title(partial_title=title)
 
     # Type some text into the application window
-    virtual_display.type_text("Hello, world!")
+    virtual_display.send_keystroke(keystroke)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run a virtual display manager and interact with application windows.")
@@ -64,5 +63,10 @@ if __name__ == "__main__":
         required=True,
         help="The partial title of the application window to focus (e.g. 'InputTest.txt - Terminal')."
     )
+    parser.add_argument(
+        "-k", "--keystroke",
+        required=True,
+        help="The keystroke to send (e.g. 'a', 'Shift+a')."
+    )
     args = parser.parse_args()
-    main(args.title)
+    main(args.title, args.keystroke)
