@@ -47,11 +47,10 @@ class VirtualDisplayManager:
         """
         subprocess.run(["./bash/keystroke_to_focused_window.sh", keystroke], check=True)
 
-def main(title=None, keystroke=None):
-    virtual_display = VirtualDisplayManager(display_number=99)
-
-    # Focus the application window by its title
-    virtual_display.focus_window_by_partial_title(partial_title=title)
+def main(title=None, keystroke=None, virtual_display=None):
+    if virtual_display is None:
+        virtual_display = VirtualDisplayManager(display_number=99)
+        virtual_display.focus_window_by_partial_title(partial_title=title)
 
     # Type some text into the application window
     virtual_display.send_keystroke(keystroke)

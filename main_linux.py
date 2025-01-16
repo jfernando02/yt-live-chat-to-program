@@ -51,6 +51,9 @@ def processor_thread():
     Processes messages from the shared queue.
     Validates and executes valid messages.
     """
+    virtual_display = input_to_program_linux.VirtualDisplayManager(display_number=99)
+    virtual_display.focus_window_by_partial_title(partial_title=title)
+
     while True:
         # Wait for a message to arrive in the queue
         try:
@@ -59,7 +62,7 @@ def processor_thread():
             continue
 
         # Process the message (execute)
-        input_to_program_linux.main(title, message)
+        input_to_program_linux.main(title, message, virtual_display)
 
         # Mark the task as done
         message_queue.task_done()
