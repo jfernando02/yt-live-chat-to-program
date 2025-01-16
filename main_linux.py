@@ -104,7 +104,7 @@ def handle_move_command(message):
 
         # Add the action to the queue `count` number of times
         for _ in range(count):
-            message_queue.put(action)
+            message_queue.put(CHAT_TO_WINDOWS_INPUT_MAP[action])
 
         print(f"Added '{action}' to the queue {count} times.")
         return True
