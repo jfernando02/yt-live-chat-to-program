@@ -41,7 +41,7 @@ def listener_thread():
         potential_input = message['message']
         if valid_move_command(potential_input):
             message_queue.put(CHAT_TO_WINDOWS_INPUT_MAP[potential_input])
-            display_queue.put([message['author']['name'], potential_input])
+            display_queue.put([message['author']['name'], message['message']])
 
 def processor_thread():
     """
