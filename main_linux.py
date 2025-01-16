@@ -1,4 +1,4 @@
-import time
+from datetime import datetime
 import queue
 import threading
 import json
@@ -28,7 +28,7 @@ title = config.get("TITLE", "Default Title")  # Default if not found
 url = config.get("URL", "https://default.url")  # Default if not found
 
 def listener_thread():
-    current_time = time.time()
+    current_time = datetime.now().strftime("%H:%M:%S")
     chat = ChatDownloader(cookies="./cookies.txt").get_chat(url, start_time=current_time)
 
     def format_message(message_dictionary, add_name):  # FORMAT: <author>:   <message> or <message>
