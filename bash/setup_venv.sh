@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Name of the virtual environment directory
-VENV_DIR="venv"
+VENV_DIR=".venv"
 
 echo "Setting up Python virtual environment..."
 
