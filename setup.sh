@@ -12,8 +12,4 @@ sudo apt-get install -y xvfb
 echo "Installing xdotool..."
 sudo apt-get install -y xdotool
 
-# Install Python dependencies
-echo "Installing Python dependencies..."
-pip install -r requirements.txt
-
 echo "Setup complete!"
