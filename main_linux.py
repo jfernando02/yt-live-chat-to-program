@@ -52,7 +52,6 @@ def processor_thread():
     Validates and executes valid messages.
     """
     virtual_display = input_to_program_linux.VirtualDisplayManager(display_number=99)
-    virtual_display.focus_window_by_partial_title(partial_title=title)
 
     while True:
         # Wait for a message to arrive in the queue

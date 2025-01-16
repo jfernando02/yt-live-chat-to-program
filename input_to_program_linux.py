@@ -50,9 +50,9 @@ class VirtualDisplayManager:
 def main(title=None, keystroke=None, virtual_display=None):
     if virtual_display is None:
         virtual_display = VirtualDisplayManager(display_number=99)
-        virtual_display.focus_window_by_partial_title(partial_title=title)
 
     # Type some text into the application window
+    virtual_display.focus_window_by_partial_title(partial_title=title)
     virtual_display.send_keystroke(keystroke)
 
 if __name__ == "__main__":
