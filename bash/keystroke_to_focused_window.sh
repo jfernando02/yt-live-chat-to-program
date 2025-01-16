@@ -21,5 +21,7 @@ fi
 
 echo "Focused window ID: $FOCUSED_WINDOW"
 
-# Send the keystroke to the focused window
-xdotool key --window "$FOCUSED_WINDOW" "$KEYSTROKE"
+# Press and hold the keystroke for 0.15 seconds
+xdotool keydown --window "$FOCUSED_WINDOW" "$KEYSTROKE"
+sleep 0.15  # Hold the key for 0.15 seconds
+xdotool keyup --window "$FOCUSED_WINDOW" "$KEYSTROKE"
