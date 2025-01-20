@@ -14,6 +14,8 @@ display_queue = queue.Queue()
 CHAT_TO_WINDOWS_INPUT_MAP = {
     "a": "c",
     "b": "v",
+    "x": "b",
+    "y": "n",
     "left": "a",
     "right": "d",
     "up": "w",
