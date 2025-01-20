@@ -12,4 +12,7 @@ sudo apt-get install -y xvfb
 echo "Installing xdotool..."
 sudo apt-get install -y xdotool
 
+echo "Installing tkinter..."
+sudo apt-get install python3-tk
+
 echo "Setup complete!"
