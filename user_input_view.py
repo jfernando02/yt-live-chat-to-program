@@ -1,9 +1,11 @@
 import tkinter as tk
 from datetime import datetime
 
+import main_linux
+
 
 class ChatApplication:
-    def __init__(self, root):
+    def __init__(self, root, valid_commands=None):
         """
         Initialize the Chat Application in the provided Tkinter root window.
         """
@@ -23,6 +25,7 @@ class ChatApplication:
 
         # Initialize the main window
         self.root = root
+        self.valid_commands = valid_commands
         self.setup_window()
 
     def setup_window(self):
@@ -44,6 +47,18 @@ class ChatApplication:
             pady=10,
         )
         self.timer_label.pack(anchor="n")  # Place timer at the top center
+
+        # Add a keys label below the timer label
+        self.keys_label = tk.Label(
+            self.root,
+            font=("Arial", 15),
+            bg=self.BACKGROUND_COLOR,
+            fg=self.TEXT_COLOR,
+            pady=10,
+        )
+        self.keys_label.pack(anchor="n")  # Place keys label below the timer
+
+        self.update_keys_label()
 
         # Add a frame to make the chat resizable
         self.chat_frame = tk.Frame(self.root, bg=self.BACKGROUND_COLOR)
@@ -149,6 +164,14 @@ class ChatApplication:
         """
         self.remove_extra_messages()
 
+    def update_keys_label(self):
+        """
+        Updates the label to display all keys of the dictionary.
+        """
+        keys = ", ".join(self.valid_commands.keys())
+        self.keys_label.config(
+            text=f"Try typing: {keys}"
+        )
 
 # Example usage of the class (e.g., in main_linux)
 if __name__ == "__main__":
@@ -172,7 +195,7 @@ if __name__ == "__main__":
     ]
 
     # Initialize the ChatApplication class
-    app = ChatApplication(root)
+    app = ChatApplication(root, main_linux.CHAT_TO_WINDOWS_INPUT_MAP)
 
     # Add messages with a delay
     app.add_messages_with_delay(messages)

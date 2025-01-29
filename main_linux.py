@@ -118,7 +118,7 @@ def start_gui():
     root = tk.Tk()
 
     # Initialize the ChatApplication instance
-    app = user_input_view.ChatApplication(root)
+    app = user_input_view.ChatApplication(root, CHAT_TO_WINDOWS_INPUT_MAP)
 
     # Start polling for new messages from the display queue
     root.after(100, poll_display_queue)
