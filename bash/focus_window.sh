@@ -1,14 +1,7 @@
 #!/bin/bash
 
-# Start a virtual display for persistent use (if not already running)
-if ! pgrep -x "Xvfb" > /dev/null; then
-  echo "Starting virtual display (Xvfb) on :99..."
-  Xvfb :99 -screen 0 1024x768x16 &
-  sleep 2 # Wait for Xvfb to start
-fi
-
 # Set DISPLAY to the virtual display
-export DISPLAY=:99
+export DISPLAY=:10.0
 
 # Path to the config.json file
 CONFIG_FILE="config.json"
