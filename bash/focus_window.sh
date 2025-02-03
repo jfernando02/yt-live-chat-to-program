@@ -28,7 +28,7 @@ if [ -z "$SEARCH_TERM" ] || [ "$SEARCH_TERM" == "null" ]; then
 fi
 
 # Find the window ID using the search term from config.json
-WINDOW_ID=$(xdotool search --all --name "$SEARCH_TERM" | head -n 1)
+WINDOW_ID=$(xdotool search --all "$SEARCH_TERM" | head -n 1)
 
 # Check if the window was found
 if [ -z "$WINDOW_ID" ]; then
