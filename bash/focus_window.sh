@@ -19,11 +19,11 @@ if [ ! -f "$CONFIG_FILE" ]; then
 fi
 
 # Extract the search term (title) from config.json
-SEARCH_TERM=$(jq -r '.title' "$CONFIG_FILE")
+SEARCH_TERM=$(jq -r '.TITLE' "$CONFIG_FILE")
 
 # Validate that the search term was extracted successfully
 if [ -z "$SEARCH_TERM" ] || [ "$SEARCH_TERM" == "null" ]; then
-  echo "Error: The 'title' field is missing or null in $CONFIG_FILE."
+  echo "Error: The 'TITLE' field is missing or null in $CONFIG_FILE."
   exit 1
 fi
 
