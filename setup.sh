@@ -15,4 +15,8 @@ sudo apt-get install -y xdotool
 echo "Installing tkinter..."
 sudo apt-get install python3-tk
 
+# Install jq
+echo "Installing jq..."
+sudo apt-get install -y jq
+
 echo "Setup complete!"
