@@ -19,19 +19,25 @@ then
     exit 1
 fi
 
-# Step 3: Create a virtual environment if it doesn't exist
-if [ ! -d "$VENV_DIR" ]; then
-    echo "Creating virtual environment ($VENV_DIR)..."
-    python3 -m venv "$VENV_DIR"
+# Step 3: Check if the virtual environment already exists
+if [ -d "$VENV_DIR" ]; then
+    echo "Virtual environment ($VENV_DIR) already exists. Removing it..."
+    rm -rf "$VENV_DIR"
     if [ $? -ne 0 ]; then
-        echo "Error: Failed to create the virtual environment."
+        echo "Error: Failed to delete the existing virtual environment."
         exit 1
     fi
-else
-    echo "Virtual environment ($VENV_DIR) already exists. Skipping creation step."
 fi
 
-# Step 4: Activate the virtual environment
+# Step 4: Create the virtual environment
+echo "Creating virtual environment ($VENV_DIR)..."
+python3 -m venv "$VENV_DIR"
+if [ $? -ne 0 ]; then
+    echo "Error: Failed to create the virtual environment."
+    exit 1
+fi
+
+# Step 5: Activate the virtual environment
 echo "Activating virtual environment..."
 source "$VENV_DIR/bin/activate"
 if [ $? -ne 0 ]; then
@@ -39,7 +45,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# Step 5: Install required dependencies from requirements.txt
+# Step 6: Install required dependencies from requirements.txt
 if [ -f "requirements.txt" ]; then
     echo "Installing dependencies from requirements.txt..."
     pip install --upgrade pip  # Upgrade pip to the latest version
