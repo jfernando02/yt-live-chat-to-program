@@ -1,7 +1,14 @@
 #!/bin/bash
 
-# Set DISPLAY explicitly to ensure graphical environment is accessible
-export DISPLAY=:0
+# Start a virtual display for persistent use (if not already running)
+if ! pgrep -x "Xvfb" > /dev/null; then
+  echo "Starting virtual display (Xvfb) on :99..."
+  Xvfb :99 -screen 0 1024x768x16 &
+  sleep 2 # Wait for Xvfb to start
+fi
+
+# Set DISPLAY to the virtual display
+export DISPLAY=:99
 
 # Path to the config.json file
 CONFIG_FILE="config.json"
@@ -26,8 +33,6 @@ if [ -z "$SEARCH_TERM" ] || [ "$SEARCH_TERM" == "null" ]; then
   echo "Error: The 'TITLE' field is missing or null in $CONFIG_FILE."
   exit 1
 fi
-
-echo "Searching for a window with title: $SEARCH_TERM"
 
 # Find the window ID using the search term from config.json
 WINDOW_ID=$(xdotool search --all --name "$SEARCH_TERM" | head -n 1)

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set DISPLAY explicitly to ensure graphical environment is accessible
-export DISPLAY=:0
+export DISPLAY=:99
 
 # Check if a keystroke is provided
 if [ -z "$1" ]; then
