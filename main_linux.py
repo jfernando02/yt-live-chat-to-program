@@ -12,16 +12,14 @@ message_queue = queue.Queue()
 display_queue = queue.Queue()
 
 CHAT_TO_WINDOWS_INPUT_MAP = {
-    "a": "c",
-    "b": "v",
-    "x": "b",
-    "y": "n",
-    "left": "a",
-    "right": "d",
-    "up": "w",
-    "down": "s",
-    "select": "z",
-    "start": "x"
+    "a": "a",
+    "b": "b",
+    "x": "x",
+    "y": "y",
+    "left": "j",
+    "right": "l",
+    "up": "i",
+    "down": "k"
 }
 
 # Load the configuration file
