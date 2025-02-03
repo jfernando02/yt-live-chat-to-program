@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export DISPLAY=:10.0
+
 # Check if a search term (title) is provided as the first argument
 if [ -z "$1" ]; then
   echo "Usage: $0 <search_term>"
