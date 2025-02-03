@@ -52,3 +52,4 @@ echo "Focused window ID: $FOCUSED_WINDOW"
 xdotool keydown --window "$FOCUSED_WINDOW" "$KEYSTROKE"
 sleep 0.15  # Hold the key for 0.15 seconds
 xdotool keyup --window "$FOCUSED_WINDOW" "$KEYSTROKE"
+sleep 0.15 # Add additional sleep
