@@ -31,29 +31,20 @@ class VirtualDisplayManager:
         # Allow some time for the application to start
         time.sleep(2)
 
-    def focus_window_by_partial_title(self, partial_title):
-        """
-        Focus the application window by a portion of its title.
-        :param partial_title: A substring of the title of the window to focus
-        :type partial_title: str
-        """
-        subprocess.run(["./bash/focus_window.sh", partial_title], check=True)
-
-    def send_keystroke(self, keystroke):
+    def send_keystroke(self, partial_title, keystroke):
         """
         Send keystroke into the focused window.
         :param keystroke: The keystroke to send
         :type keystroke: str
         """
-        subprocess.run(["./bash/keystroke_to_focused_window.sh", keystroke], check=True)
+        subprocess.run(["./bash/keystroke_to_focused_window.sh", partial_title, keystroke], check=True)
 
 def main(title=None, keystroke=None, virtual_display=None):
     if virtual_display is None:
         virtual_display = VirtualDisplayManager(display_number=99)
 
     # Type some text into the application window
-    virtual_display.focus_window_by_partial_title(partial_title=title)
-    virtual_display.send_keystroke(keystroke)
+    virtual_display.send_keystroke(partial_title=title, keystroke=keystroke)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run a virtual display manager and interact with application windows.")
