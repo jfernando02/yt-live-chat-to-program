@@ -85,7 +85,7 @@ class ChatApplication:
         Removes messages to keep the count within the dynamically calculated MAX_MESSAGES.
         """
         max_messages = self.calculate_max_messages()
-        while len(self.displayed_messages) > max_messages:
+        while len(self.displayed_messages) >= max_messages:
             oldest_message = self.displayed_messages.pop(0)  # Remove from the queue
             oldest_message.destroy()  # Remove the widget from display
 
@@ -115,6 +115,9 @@ class ChatApplication:
         Adds a new message to the app, with username on the left and their message on the right.
         Removes extra messages if the message count exceeds dynamically calculated MAX_MESSAGES.
         """
+        # Remove extra messages if necessary
+        self.remove_extra_messages()
+
         # Create a new container to hold the user's username and message, arranged horizontally
         message_container = tk.Frame(self.chat_frame, bg=self.MESSAGE_BG_COLOR)
         message_container.pack(anchor="w", pady=5, padx=10, fill="x")  # Align Left
@@ -145,9 +148,6 @@ class ChatApplication:
 
         # Add the message container to the list of displayed messages
         self.displayed_messages.append(message_container)
-
-        # Remove extra messages if necessary
-        self.remove_extra_messages()
 
     def add_messages_with_delay(self, messages, index=0):
         """
