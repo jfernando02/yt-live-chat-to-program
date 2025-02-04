@@ -38,7 +38,7 @@ def listener_thread():
     print('\n Messages:')
     for message in chat:
         chat.print_formatted(message)
-        potential_input = message['message']
+        potential_input = message['message'].lower()
         if valid_move_command(potential_input):
             message_queue.put(CHAT_TO_WINDOWS_INPUT_MAP[potential_input])
             display_queue.put([message['author']['name'], potential_input])
@@ -75,7 +75,7 @@ def valid_move_command(message):
         bool: True if the message is valid and processed successfully, False otherwise.
     """
     try:
-        action = message.lower()
+        action = message
         if action in CHAT_TO_WINDOWS_INPUT_MAP:
             return True
         else:
