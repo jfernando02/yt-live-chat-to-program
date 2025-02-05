@@ -43,8 +43,14 @@ def main(title=None, keystroke=None, virtual_display=None):
     if virtual_display is None:
         virtual_display = VirtualDisplayManager(display_number=99)
 
+    retry_count = 3
     # Type some text into the application window
-    virtual_display.send_keystroke(partial_title=title, keystroke=keystroke)
+    for attempt in range(retry_count):
+        try:
+            virtual_display.send_keystroke(partial_title=title, keystroke=keystroke)
+            break
+        except Exception as e:
+            print(f"Error sending keystroke on attempt {attempt + 1}: {e}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run a virtual display manager and interact with application windows.")

@@ -85,7 +85,7 @@ class ChatApplication:
         Removes messages to keep the count within the dynamically calculated MAX_MESSAGES.
         """
         max_messages = self.calculate_max_messages()
-        while len(self.displayed_messages) > max_messages:
+        while len(self.displayed_messages) >= max_messages:
             oldest_message = self.displayed_messages.pop(0)  # Remove from the queue
             oldest_message.destroy()  # Remove the widget from display
 
