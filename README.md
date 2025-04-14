@@ -1,5 +1,4 @@
-YouTube Live Chat to Text File
-by: Divinity
+YouTube Live Chat to Application
 
 Description and Credits
 --------------------------------------------------------------------------
